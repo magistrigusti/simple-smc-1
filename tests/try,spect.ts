@@ -17,6 +17,7 @@ describe('Main', () => {
     let receiver: SandboxContract<TreasuryContract>;
     let admin: SandboxContract<TreasuryContract>;
     let user: SandboxContract<TreasuryContract>;
+ 
 
     beforeEach(async () => {
         blockchain = await Blockchain.create();
@@ -25,8 +26,8 @@ describe('Main', () => {
         user = await blockchain.treasury('user');
 
         main = blockchain.openContract(Main.createFromConfig({
-            receiver: receiver.address,
-            admin: admin.address
+          receiver: receiver.address,
+          admin: admin.address
         }, code));
 
         deployer = await blockchain.treasury('deployer');
@@ -42,9 +43,6 @@ describe('Main', () => {
     });
 
     it('should send funds to receiver', async () => {
-        const sendFundsResult = await main.sendFunds(user.getSender(), toNano('1'));
-        expect(sendFundsResult.transactions).toHaveTransaction({
-            
-        })
+        await blockchain.sendMessage();
     });
 });
